@@ -1,0 +1,201 @@
+{
+  "address": "4qR9hdwNFQu4R23mwF3TcmBhW69qZpFPAVJGjmzsivZ3",
+  "metadata": {
+    "name": "diary",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "create_diary_entry",
+      "discriminator": [
+        109,
+        17,
+        50,
+        15,
+        134,
+        113,
+        154,
+        122
+      ],
+      "accounts": [
+        {
+          "name": "diary_entry",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "arg",
+                "path": "title"
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              }
+            ]
+          }
+        },
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "name": "message",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "delete_diary_entry",
+      "discriminator": [
+        20,
+        159,
+        182,
+        49,
+        14,
+        232,
+        37,
+        193
+      ],
+      "accounts": [
+        {
+          "name": "diary_entry",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "arg",
+                "path": "title"
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              }
+            ]
+          }
+        },
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "title",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "update_diary_entry",
+      "discriminator": [
+        161,
+        119,
+        217,
+        234,
+        73,
+        208,
+        237,
+        162
+      ],
+      "accounts": [
+        {
+          "name": "diary_entry",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "diary_entry.title",
+                "account": "DiaryEntryState"
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              }
+            ]
+          }
+        },
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "message",
+          "type": "string"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "DiaryEntryState",
+      "discriminator": [
+        96,
+        145,
+        67,
+        32,
+        176,
+        96,
+        33,
+        62
+      ]
+    }
+  ],
+  "types": [
+    {
+      "name": "DiaryEntryState",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "owner",
+            "type": "pubkey"
+          },
+          {
+            "name": "title",
+            "type": "string"
+          },
+          {
+            "name": "message",
+            "type": "string"
+          },
+          {
+            "name": "created_at",
+            "type": "i64"
+          },
+          {
+            "name": "updated_at",
+            "type": {
+              "option": "i64"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
